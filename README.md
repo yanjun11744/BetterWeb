@@ -38,7 +38,7 @@
 - 在 JavLibrary 详情页把番号变成可点击链接
 - 自动查询对应的 JavFree 详情页
 - 在新标签页打开
-- 当前版本：`1.3`
+- 当前版本：`1.5`
 - [查看详细说明](docs/scripts/javfree-link.md)
 
 #### No Ad Redirect
