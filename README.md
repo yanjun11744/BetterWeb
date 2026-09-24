@@ -6,6 +6,27 @@
 
 无需 Node.js、npm 或构建工具。每个脚本都是可以直接安装到 Tampermonkey / Violentmonkey 的 `.user.js` 文件。
 
+## 快速安装
+
+以下链接会直接打开 Tampermonkey / Violentmonkey 的安装页面：
+
+- [JavLibrary 番号跳转 JavFree](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/javfree-link.user.js)
+- [JavLibrary 防广告跳转](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/no-ad-redirect.user.js)
+
+安装前请先安装 [Tampermonkey](https://www.tampermonkey.net/) 或 [Violentmonkey](https://violentmonkey.github.io/)。也可以打开脚本文件后点击 GitHub 页面上的 **Raw** 安装。
+
+## 脚本目录
+
+每个脚本都有独立的功能说明、适用页面、权限和已知限制：
+
+| 脚本 | 说明 |
+| --- | --- |
+| [JavLibrary 番号跳转 JavFree](docs/scripts/javfree-link.md) | 将 JavLibrary 详情页中的番号转换为 JavFree 对应详情页链接 |
+| [JavLibrary 防广告跳转](docs/scripts/no-ad-redirect.md) | 拦截 JavLibrary 页面上的外部广告跳转和弹窗 |
+| [基础模板](docs/scripts/basic-template.md) | 新增 BetterWeb 用户脚本时使用的元数据模板 |
+
+脚本源文件仍集中在 [`scripts/`](scripts/) 目录中；文档目录只负责说明功能和维护方式。
+
 ## Scripts
 
 ### JavLibrary
@@ -17,8 +38,8 @@
 - 在 JavLibrary 详情页把番号变成可点击链接
 - 自动查询对应的 JavFree 详情页
 - 在新标签页打开
-- 当前稳定版本：`1.3`
-- 保留已经验证可用的 DOM 与点击逻辑
+- 当前版本：`1.3`
+- [查看详细说明](docs/scripts/javfree-link.md)
 
 #### No Ad Redirect
 
@@ -28,6 +49,7 @@
 - JavLibrary 站内链接正常使用
 - JavFree 跳转正常放行
 - 与 JavFree 跳转脚本独立维护
+- [查看详细说明](docs/scripts/no-ad-redirect.md)
 
 ## Project Structure
 
@@ -39,6 +61,11 @@ BetterWeb/
 │       └── no-ad-redirect.user.js
 ├── templates/
 │   └── basic.user.js
+├── docs/
+│   └── scripts/
+│       ├── basic-template.md
+│       ├── javfree-link.md
+│       └── no-ad-redirect.md
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -47,22 +74,30 @@ BetterWeb/
 ## Install
 
 1. 安装 Tampermonkey 或 Violentmonkey。
-2. 在 GitHub 中打开需要安装的 `.user.js` 文件。
-3. 点击 **Raw**。
+2. 点击上方的直接安装链接，或在 GitHub 中打开需要安装的 `.user.js` 文件。
+3. 如果打开的是 GitHub 文件页，点击 **Raw**。
 4. 用户脚本管理器会识别脚本并显示安装页面。
-5. 确认安装。
+5. 确认安装并启用脚本。
 
 ## Automatic Updates
 
-当前脚本已经指向公开仓库：
+### 用户端自动更新
+
+每个正式脚本的元数据区都配置了 `@updateURL` 和 `@downloadURL`，指向 GitHub Raw 文件：
 
 ```text
 https://github.com/yanjun11744/BetterWeb
 ```
 
-每个脚本都配置了 `@updateURL` 和 `@downloadURL`。
+管理器会定期访问 `@updateURL`，读取脚本头部的 `@version`。当远程版本高于本地版本时，管理器会提示或自动下载新版本，具体频率和是否自动安装取决于管理器设置。
 
-以后发布新版本时，除了修改代码，还要提高：
+在 Tampermonkey 中可以通过“已安装脚本 → 设置 → 更新间隔”调整检查频率，也可以使用“检查更新”立即检查。Violentmonkey 的入口通常位于脚本详情页或扩展设置中的“检查更新”。
+
+注意：浏览器缓存、网络访问 GitHub Raw 失败，或脚本管理器禁用了自动更新，都可能导致更新延迟。手动打开上方 Raw 链接可以确认远程文件是否已更新。
+
+### 发布新版本
+
+维护者修改脚本后，必须同步提高对应脚本头部的 `@version`：
 
 ```javascript
 // @version      1.4
@@ -74,7 +109,28 @@ https://github.com/yanjun11744/BetterWeb
 1.3 → 1.4 → 1.5
 ```
 
-提交并 push 到 `main` 后，Tampermonkey 可以通过 GitHub Raw 地址检查新版本。
+推荐使用递增的版本号，例如 `1.3 → 1.4 → 1.5`。修改完成后按以下顺序发布：
+
+```bash
+git diff --check
+git add scripts/ docs/ README.md
+git commit -m "Update userscript"
+git push origin main
+```
+
+推送完成后，等待 GitHub Raw 内容可访问，再在 Tampermonkey / Violentmonkey 中手动检查更新。不要只修改 README；用户脚本管理器只会根据脚本元数据和 Raw 文件判断是否有新版本。
+
+### 新增脚本时的更新配置
+
+正式脚本至少应包含以下元数据，并将路径替换成实际文件路径：
+
+```javascript
+// @version      1.0.0
+// @updateURL    https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/<site>/<script>.user.js
+// @downloadURL  https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/<site>/<script>.user.js
+```
+
+`@version` 必须位于用户脚本元数据区内，并且每次可下载内容发生变化时递增。新增脚本后，还要在 `docs/scripts/` 增加对应说明，并把安装链接加入本 README。
 
 ## Adding Scripts
 
@@ -101,6 +157,8 @@ git add .
 git commit -m "Update userscript"
 git push
 ```
+
+提交前可运行 `git diff --check` 检查空白字符问题，并确认脚本头部的 `@match`、`@grant`、`@connect` 和版本号与实际代码一致。
 
 ## License
 
