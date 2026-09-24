@@ -12,6 +12,7 @@
 
 - [JavLibrary 番号跳转 JavFree](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/javfree-link.user.js)
 - [JavLibrary 防广告跳转](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/no-ad-redirect.user.js)
+- [JavLibrary 番号搜索 Wuji](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/wuji-search.user.js)
 
 安装前请先安装 [Tampermonkey](https://www.tampermonkey.net/) 或 [Violentmonkey](https://violentmonkey.github.io/)。也可以打开脚本文件后点击 GitHub 页面上的 **Raw** 安装。
 
@@ -23,6 +24,7 @@
 | --- | --- |
 | [JavLibrary 番号跳转 JavFree](docs/scripts/javfree-link.md) | 将 JavLibrary 详情页中的番号转换为 JavFree 对应详情页链接 |
 | [JavLibrary 防广告跳转](docs/scripts/no-ad-redirect.md) | 拦截 JavLibrary 页面上的外部广告跳转和弹窗 |
+| [JavLibrary 番号搜索 Wuji](docs/scripts/wuji-search.md) | 在番号旁添加按钮，打开 Wuji 对应搜索结果 |
 | [基础模板](docs/scripts/basic-template.md) | 新增 BetterWeb 用户脚本时使用的元数据模板 |
 
 脚本源文件仍集中在 [`scripts/`](scripts/) 目录中；文档目录只负责说明功能和维护方式。
@@ -51,6 +53,15 @@
 - 与 JavFree 跳转脚本独立维护
 - [查看详细说明](docs/scripts/no-ad-redirect.md)
 
+#### Wuji Search
+
+文件：[`scripts/javlibrary/wuji-search.user.js`](scripts/javlibrary/wuji-search.user.js)
+
+- 在 JavLibrary 番号旁添加 Wuji 图标按钮
+- 点击后在新标签页打开对应 Wuji 搜索结果
+- 支持用户脚本管理器自动更新
+- [查看详细说明](docs/scripts/wuji-search.md)
+
 ## Project Structure
 
 ```text
@@ -58,14 +69,16 @@ BetterWeb/
 ├── scripts/
 │   └── javlibrary/
 │       ├── javfree-link.user.js
-│       └── no-ad-redirect.user.js
+│       ├── no-ad-redirect.user.js
+│       └── wuji-search.user.js
 ├── templates/
 │   └── basic.user.js
 ├── docs/
 │   └── scripts/
 │       ├── basic-template.md
 │       ├── javfree-link.md
-│       └── no-ad-redirect.md
+│       ├── no-ad-redirect.md
+│       └── wuji-search.md
 ├── .gitignore
 ├── LICENSE
 └── README.md
