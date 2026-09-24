@@ -13,6 +13,7 @@
 - [JavLibrary 番号跳转 JavFree](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/javfree-link.user.js)
 - [JavLibrary 防广告跳转](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/no-ad-redirect.user.js)
 - [JavLibrary 番号搜索 Wuji](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/wuji-search.user.js)
+- [Wuji 搜索结果直接磁力](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/wuji.me/magnet-in-search.user.js)
 
 安装前请先安装 [Tampermonkey](https://www.tampermonkey.net/) 或 [Violentmonkey](https://violentmonkey.github.io/)。也可以打开脚本文件后点击 GitHub 页面上的 **Raw** 安装。
 
@@ -25,6 +26,7 @@
 | [JavLibrary 番号跳转 JavFree](docs/scripts/javfree-link.md) | 将 JavLibrary 详情页中的番号转换为 JavFree 对应详情页链接 |
 | [JavLibrary 防广告跳转](docs/scripts/no-ad-redirect.md) | 拦截 JavLibrary 页面上的外部广告跳转和弹窗 |
 | [JavLibrary 番号搜索 Wuji](docs/scripts/wuji-search.md) | 在番号旁添加按钮，打开 Wuji 对应搜索结果 |
+| [Wuji 搜索结果直接磁力](docs/scripts/wuji-magnet-in-search.md) | 在搜索结果页直接提取、打开和复制磁力链接 |
 | [基础模板](docs/scripts/basic-template.md) | 新增 BetterWeb 用户脚本时使用的元数据模板 |
 
 脚本源文件仍集中在 [`scripts/`](scripts/) 目录中；文档目录只负责说明功能和维护方式。
@@ -62,15 +64,29 @@
 - 支持用户脚本管理器自动更新
 - [查看详细说明](docs/scripts/wuji-search.md)
 
+### Wuji
+
+#### Wuji 搜索结果直接磁力
+
+文件：[`scripts/wuji.me/magnet-in-search.user.js`](scripts/wuji.me/magnet-in-search.user.js)
+
+- 在 Wuji 搜索结果中自动识别资源详情页
+- 直接提取磁力链接或根据 info hash 生成磁力链接
+- 提供磁力链接打开和复制按钮
+- 支持动态加载结果和最多 4 个并发请求
+- [查看详细说明](docs/scripts/wuji-magnet-in-search.md)
+
 ## Project Structure
 
 ```text
 BetterWeb/
 ├── scripts/
-│   └── javlibrary/
-│       ├── javfree-link.user.js
-│       ├── no-ad-redirect.user.js
-│       └── wuji-search.user.js
+│   ├── javlibrary/
+│   │   ├── javfree-link.user.js
+│   │   ├── no-ad-redirect.user.js
+│   │   └── wuji-search.user.js
+│   └── wuji.me/
+│       └── magnet-in-search.user.js
 ├── templates/
 │   └── basic.user.js
 ├── docs/
@@ -78,6 +94,7 @@ BetterWeb/
 │       ├── basic-template.md
 │       ├── javfree-link.md
 │       ├── no-ad-redirect.md
+│       ├── wuji-magnet-in-search.md
 │       └── wuji-search.md
 ├── .gitignore
 ├── LICENSE
