@@ -1,10 +1,14 @@
 // ==UserScript==
 // @name         JavLibrary 外部站点快捷按钮
 // @namespace    betterweb-javlibrary-external-links
-// @version      1.0
-// @description  在 JavLibrary 番号旁添加 JavFree、Wuji 和 Jable 快捷按钮
+// @version      1.1
+// @description  在 JavLibrary 和 JavBus 番号旁添加 JavFree、Wuji 和 Jable 快捷按钮
 // @match        https://www.javlibrary.com/*
 // @match        http://www.javlibrary.com/*
+// @match        https://*.javbus.com/*
+// @match        http://*.javbus.com/*
+// @match        https://javbus.com/*
+// @match        http://javbus.com/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_openInTab
 // @connect      javfree.me
@@ -16,14 +20,14 @@
 (function () {
     'use strict';
 
-    const idElement = document.querySelector('#video_id .text');
+    const identifier = findIdentifier();
 
-    if (!idElement) {
-        console.log('[BetterWeb] 找不到番号元素');
+    if (!identifier) {
+        console.log('[BetterWeb] 找不到番号字段');
         return;
     }
 
-    const code = idElement.textContent.trim();
+    const { code, mountPoint } = identifier;
 
     if (!code) {
         console.log('[BetterWeb] 番号为空');
@@ -66,7 +70,7 @@
     container.style.display = 'inline-flex';
     container.style.alignItems = 'center';
 
-    idElement.appendChild(container);
+    mountPoint.appendChild(container);
 
     for (const service of services) {
         createServiceButton(service);
@@ -189,5 +193,54 @@
                 }
             });
         });
+    }
+
+    function findIdentifier() {
+        if (/javlibrary\.com$/i.test(location.hostname)) {
+            const element = document.querySelector('#video_id .text');
+            const code = element?.textContent.trim();
+
+            return element && code
+                ? { code, mountPoint: element }
+                : null;
+        }
+
+        if (/javbus\.com$/i.test(location.hostname)) {
+            const info =
+                document.querySelector('.container .info') ||
+                document.querySelector('.info');
+
+            if (!info) {
+                return null;
+            }
+
+            const headers = [...info.querySelectorAll('.header')];
+            const header = headers.find(element =>
+                /^(識別碼|识别码|ID|品番)\s*[:：]?$/i.test(
+                    element.textContent.trim()
+                )
+            );
+
+            if (!header) {
+                return null;
+            }
+
+            const row = header.closest('p') || header.parentElement;
+
+            if (!row) {
+                return null;
+            }
+
+            const rowText = row.textContent
+                .replace(header.textContent, '')
+                .trim();
+            const code = rowText.match(/[A-Z0-9][A-Z0-9._-]*/i)?.[0];
+
+            return code
+                ? { code, mountPoint: row }
+                : null;
+        }
+
+        return null;
     }
 })();
