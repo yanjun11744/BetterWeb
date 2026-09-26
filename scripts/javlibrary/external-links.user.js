@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         JavLibrary 外部站点快捷按钮
+// @name         BetterWeb 多站点外部快捷按钮
 // @namespace    betterweb-javlibrary-external-links
-// @version      1.1
-// @description  在 JavLibrary 和 JavBus 番号旁添加 JavFree、Wuji 和 Jable 快捷按钮
+// @version      1.2
+// @description  在多个影片网站的番号旁添加 JavFree、Wuji 和 Jable 快捷按钮
 // @match        https://www.javlibrary.com/*
 // @match        http://www.javlibrary.com/*
 // @match        https://*.javbus.com/*
@@ -196,51 +196,67 @@
     }
 
     function findIdentifier() {
-        if (/javlibrary\.com$/i.test(location.hostname)) {
-            const element = document.querySelector('#video_id .text');
-            const code = element?.textContent.trim();
+        // Add a site adapter here when supporting another detail page.
+        const adapters = [
+            {
+                matches: hostname => /javlibrary\.com$/i.test(hostname),
+                findIdentifier: findJavLibraryIdentifier
+            },
+            {
+                matches: hostname => /javbus\.com$/i.test(hostname),
+                findIdentifier: findJavBusIdentifier
+            }
+        ];
 
-            return element && code
-                ? { code, mountPoint: element }
-                : null;
+        const adapter = adapters.find(({ matches }) =>
+            matches(location.hostname)
+        );
+
+        return adapter?.findIdentifier() ?? null;
+    }
+
+    function findJavLibraryIdentifier() {
+        const element = document.querySelector('#video_id .text');
+        const code = element?.textContent.trim();
+
+        return element && code
+            ? { code, mountPoint: element }
+            : null;
+    }
+
+    function findJavBusIdentifier() {
+        const info =
+            document.querySelector('.container .info') ||
+            document.querySelector('.info');
+
+        if (!info) {
+            return null;
         }
 
-        if (/javbus\.com$/i.test(location.hostname)) {
-            const info =
-                document.querySelector('.container .info') ||
-                document.querySelector('.info');
+        const headers = [...info.querySelectorAll('.header')];
+        const header = headers.find(element =>
+            /^(識別碼|识别码|ID|品番)\s*[:：]?$/i.test(
+                element.textContent.trim()
+            )
+        );
 
-            if (!info) {
-                return null;
-            }
-
-            const headers = [...info.querySelectorAll('.header')];
-            const header = headers.find(element =>
-                /^(識別碼|识别码|ID|品番)\s*[:：]?$/i.test(
-                    element.textContent.trim()
-                )
-            );
-
-            if (!header) {
-                return null;
-            }
-
-            const row = header.closest('p') || header.parentElement;
-
-            if (!row) {
-                return null;
-            }
-
-            const rowText = row.textContent
-                .replace(header.textContent, '')
-                .trim();
-            const code = rowText.match(/[A-Z0-9][A-Z0-9._-]*/i)?.[0];
-
-            return code
-                ? { code, mountPoint: row }
-                : null;
+        if (!header) {
+            return null;
         }
 
-        return null;
+        const row = header.closest('p') || header.parentElement;
+
+        if (!row) {
+            return null;
+        }
+
+        const rowText = row.textContent
+            .replace(header.textContent, '')
+            .trim();
+        const code = rowText.match(/[A-Z0-9][A-Z0-9._-]*/i)?.[0];
+
+        return code
+            ? { code, mountPoint: row }
+            : null;
     }
 })();

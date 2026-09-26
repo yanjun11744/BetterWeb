@@ -1,11 +1,11 @@
-# JavLibrary / JavBus 外部站点快捷按钮
+# BetterWeb 多站点外部快捷按钮
 
 源文件：[`scripts/javlibrary/external-links.user.js`](../../scripts/javlibrary/external-links.user.js)  
-当前版本：`1.1`
+当前版本：`1.2`
 
 ## 功能
 
-脚本在 JavLibrary 或 JavBus 详情页的番号后一次性添加三个快捷按钮，顺序固定为：
+脚本在支持的网站详情页番号后一次性添加三个快捷按钮，顺序固定为：
 
 ```text
 [JavFree] [Wuji] [Jable]
@@ -35,7 +35,7 @@ https://jable.tv/videos/<小写番号>/
 
 三个按钮共享番号读取、按钮创建、图标样式、悬停效果和新标签页打开逻辑。服务差异通过配置中的 `getURL` 函数处理，因此按钮顺序和样式只需维护一份。
 
-## 适用范围与权限
+## 支持的网站与权限
 
 - JavLibrary：`http://www.javlibrary.com/*`、`https://www.javlibrary.com/*`，读取 `#video_id .text` 中的番号。
 - JavBus：HTTP / HTTPS 根域名及子域名，在 `.info` 信息区查找“識別碼/识别码”字段并把按钮放在番号所在行末尾。
@@ -52,5 +52,5 @@ https://jable.tv/videos/<小写番号>/
 
 - JavFree 依赖其搜索页面结构，网站改版后可能需要更新匹配规则。
 - Wuji 和 Jable 使用固定 URL 规则，不会预先确认目标页面是否存在。
-- 依赖 JavLibrary 使用 `#video_id .text` 保存番号，或 JavBus 在 `.info` 中提供“識別碼/识别码”信息行。
+- 每个支持的网站都需要对应的域名匹配和番号定位适配器。新增网站时，在脚本的 `adapters` 列表中加入适配器，并为其配置 `@match`。
 - 依赖用户脚本管理器支持 `GM_openInTab` 和 `GM_xmlhttpRequest`。
