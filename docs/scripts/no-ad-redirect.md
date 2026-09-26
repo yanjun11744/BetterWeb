@@ -29,7 +29,7 @@
 
 ## 与其他脚本的关系
 
-本脚本只负责拦截跳转，不负责查找或生成 JavFree 链接。它可以单独使用，也可以和 [JavLibrary 番号跳转 JavFree](javfree-link.md) 同时安装；后者生成的 JavFree 链接会被本脚本放行。
+本脚本只负责拦截跳转，不负责查找或生成 JavFree 链接。它可以单独使用，也可以和 [JavLibrary 外部站点快捷按钮](external-links.md) 同时安装；后者生成的 JavFree 链接会被本脚本放行。
 
 ## 自动更新与安装
 

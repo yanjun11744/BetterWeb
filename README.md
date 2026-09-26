@@ -11,6 +11,7 @@
 以下链接会直接打开 Tampermonkey / Violentmonkey 的安装页面：
 
 - [JavLibrary 外部站点快捷按钮](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/external-links.user.js)
+- [JavLibrary 演员搜索 JavFree](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/javfree-actor-search.user.js)
 - [JavLibrary 防广告跳转](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/no-ad-redirect.user.js)
 - [Wuji 搜索结果直接磁力](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/wuji.me/magnet-in-search.user.js)
 
@@ -23,6 +24,7 @@
 | 脚本 | 说明 |
 | --- | --- |
 | [JavLibrary 外部站点快捷按钮](docs/scripts/external-links.md) | 在番号旁统一添加 JavFree、Wuji、Jable 三个按钮 |
+| [JavLibrary 演员搜索 JavFree](docs/scripts/javfree-actor-search.md) | 在每位出演者后添加 JavFree 演员搜索按钮 |
 | [JavLibrary 防广告跳转](docs/scripts/no-ad-redirect.md) | 拦截 JavLibrary 页面上的外部广告跳转和弹窗 |
 | [Wuji 搜索结果直接磁力](docs/scripts/wuji-magnet-in-search.md) | 在搜索结果页直接提取、打开和复制磁力链接 |
 | [基础模板](docs/scripts/basic-template.md) | 新增 BetterWeb 用户脚本时使用的元数据模板 |
@@ -41,6 +43,15 @@
 - 共享按钮样式和跳转逻辑
 - JavFree 自动查找真实详情页
 - [查看详细说明](docs/scripts/external-links.md)
+
+#### JavFree Actor Search
+
+文件：[`scripts/javlibrary/javfree-actor-search.user.js`](scripts/javlibrary/javfree-actor-search.user.js)
+
+- 在每位出演者后添加 JavFree 搜索图标
+- 点击后在新标签页打开演员搜索结果
+- 支持用户脚本管理器自动更新
+- [查看详细说明](docs/scripts/javfree-actor-search.md)
 
 #### No Ad Redirect
 
@@ -71,6 +82,7 @@ BetterWeb/
 ├── scripts/
 │   ├── javlibrary/
 │   │   ├── external-links.user.js
+│   │   ├── javfree-actor-search.user.js
 │   │   └── no-ad-redirect.user.js
 │   └── wuji.me/
 │       └── magnet-in-search.user.js
@@ -80,6 +92,7 @@ BetterWeb/
 │   └── scripts/
 │       ├── basic-template.md
 │       ├── external-links.md
+│       ├── javfree-actor-search.md
 │       ├── no-ad-redirect.md
 │       └── wuji-magnet-in-search.md
 ├── .gitignore
