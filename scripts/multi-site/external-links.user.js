@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BetterWeb 多站点外部快捷按钮
 // @namespace    betterweb-javlibrary-external-links
-// @version      1.2
+// @version      1.3
 // @description  在多个影片网站的番号旁添加 JavFree、Wuji 和 Jable 快捷按钮
 // @match        https://www.javlibrary.com/*
 // @match        http://www.javlibrary.com/*
@@ -12,8 +12,8 @@
 // @grant        GM_xmlhttpRequest
 // @grant        GM_openInTab
 // @connect      javfree.me
-// @updateURL    https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/external-links.user.js
-// @downloadURL  https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/external-links.user.js
+// @updateURL    https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/multi-site/external-links.user.js
+// @downloadURL  https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/multi-site/external-links.user.js
 // @run-at       document-end
 // ==/UserScript==
 

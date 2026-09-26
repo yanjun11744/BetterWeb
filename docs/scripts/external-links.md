@@ -1,7 +1,7 @@
 # BetterWeb 多站点外部快捷按钮
 
-源文件：[`scripts/javlibrary/external-links.user.js`](../../scripts/javlibrary/external-links.user.js)  
-当前版本：`1.2`
+源文件：[`scripts/multi-site/external-links.user.js`](../../scripts/multi-site/external-links.user.js)<br>
+当前版本：`1.3`
 
 ## 功能
 
@@ -45,7 +45,7 @@ https://jable.tv/videos/<小写番号>/
 
 ## 安装与自动更新
 
-- [直接安装](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/external-links.user.js)
+- [直接安装](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/multi-site/external-links.user.js)
 - 脚本已配置 `@updateURL` 和 `@downloadURL`，用户脚本管理器会根据 `@version` 检查更新。
 
 ## 已知限制

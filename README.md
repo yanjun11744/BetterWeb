@@ -10,7 +10,7 @@
 
 以下链接会直接打开 Tampermonkey / Violentmonkey 的安装页面：
 
-- [BetterWeb 多站点外部快捷按钮](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/external-links.user.js)
+- [BetterWeb 多站点外部快捷按钮](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/multi-site/external-links.user.js)
 - [JavLibrary 演员搜索 JavFree](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/javfree-actor-search.user.js)
 - [JavLibrary 防广告跳转](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javlibrary/no-ad-redirect.user.js)
 - [JavBus 去广告](https://raw.githubusercontent.com/yanjun11744/BetterWeb/main/scripts/javbus/javbus-clean.user.js)
@@ -39,7 +39,7 @@
 
 #### External Links
 
-文件：[`scripts/javlibrary/external-links.user.js`](scripts/javlibrary/external-links.user.js)
+文件：[`scripts/multi-site/external-links.user.js`](scripts/multi-site/external-links.user.js)
 
 - 在 JavLibrary 和 JavBus 的番号旁固定显示 JavFree、Wuji、Jable 三个按钮
 - 共享按钮样式和跳转逻辑
@@ -93,8 +93,9 @@
 ```text
 BetterWeb/
 ├── scripts/
+│   ├── multi-site/
+│   │   └── external-links.user.js
 │   ├── javlibrary/
-│   │   ├── external-links.user.js
 │   │   ├── javfree-actor-search.user.js
 │   │   └── no-ad-redirect.user.js
 │   ├── javbus/
