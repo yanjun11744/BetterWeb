@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JavLibrary 演员搜索 JavFree
 // @namespace    betterweb-javlibrary-javfree-actor-search
-// @version      1.0
+// @version      1.1
 // @description  在 JavLibrary 出演者后添加 JavFree 演员搜索按钮
 // @match        https://www.javlibrary.com/*
 // @match        http://www.javlibrary.com/*
