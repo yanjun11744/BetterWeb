@@ -44,7 +44,7 @@
         const button = document.createElement('button');
         const icon = document.createElement('img');
         const searchURL =
-            'https://javfree.me/?s=' + encodeURIComponent(actorName);
+            'https://javfree.me/tag/' + encodeURIComponent(actorName) + '/';
 
         button.className = 'javfree-actor-button';
         button.type = 'button';
