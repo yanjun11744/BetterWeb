@@ -54,7 +54,7 @@
             icon: 'https://javfree.me/favicon.ico',
             getURL: findJavFreeURL,
             fallbackURL:
-                `https://javfree.me/?s=${encodeURIComponent(code)}`
+                `https://javfree.me/search/${encodeURIComponent(code)}`
         },
         {
             id: 'wuji',
@@ -179,7 +179,7 @@
 
     function findJavFreeURL(searchCode) {
         const searchURL =
-            'https://javfree.me/?s=' +
+            'https://javfree.me/search/' +
             encodeURIComponent(searchCode);
 
         return new Promise(resolve => {
